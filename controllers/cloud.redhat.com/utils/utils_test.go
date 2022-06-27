@@ -174,6 +174,24 @@ func TestRandString(t *testing.T) {
 	assert.NotEqual(t, a, b)
 }
 
+func TestRandStringLower(t *testing.T) {
+	a := utils.RandStringLower(12)
+	b := utils.RandStringLower(12)
+	assert.NotEqual(t, a, b)
+}
+
+func TestRandPass(t *testing.T) {
+	a, err1 := utils.RandPassword(16)
+	b, err2 := utils.RandPassword(16)
+	assert.NotEqual(t, a, b)
+	assert.NoError(t, err1)
+	assert.NoError(t, err2)
+
+	c, err := utils.RandPassword(12)
+	assert.Error(t, err)
+	assert.Equal(t, "", c)
+}
+
 func TestPodAnnotationsUpdate(t *testing.T) {
 	table := []struct {
 		name        string
